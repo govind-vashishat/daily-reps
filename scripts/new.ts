@@ -3,8 +3,16 @@ import path from "node:path";
 
 async function main() {
     const problemName = process.argv[2];
+    const nameRegex = /^[a-z0-9-]+$/;
+    const folderPattern = /^\d{3}-/;
+
     if (!problemName) {
         console.error("no problem was given. usage - bun run new <problem-name>");
+        process.exit(1);
+    }
+
+    if (!nameRegex.test(problemName)) {
+        console.error("provide a valid problem name");
         process.exit(1);
     }
 
@@ -12,11 +20,10 @@ async function main() {
     const problemDir = path.resolve(import.meta.dirname, "../problems");
     const entries = await readdir(problemDir, { withFileTypes: true });
 
-    const regex = /^\d{3}-/;
     const problemNums = entries
         .filter((e) => e.isDirectory())
         .map((e) => e.name)
-        .filter((e) => regex.test(e))
+        .filter((e) => folderPattern.test(e))
         .map((e) => e.slice(0, 3))
         .map((e) => Number(e));
 
@@ -25,7 +32,7 @@ async function main() {
     await cp(templatePath, path.join(problemDir, `${problemNum}-${problemName}`), {
         recursive: true,
     });
-    console.log("created problem");
+    console.log(`created problems/${problemNum}-${problemName}`);
 }
 
 main().catch((err) => {
