@@ -1,0 +1,16 @@
+{
+  "name": "daily-reps",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "new": "bun run scripts/new.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check",
+    "format": "biome check --write"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "@types/bun": "latest",
+    "typescript": "^5"
+  }
+}
