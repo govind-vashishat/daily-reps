@@ -4,17 +4,23 @@ Tick a problem when you start it and write its number next to it: `- [x] Promise
 
 Tags: SYS · ASYNC · TYPES · ERR · REACT · FN · DESIGN · COMM
 
-## Weekly rhythm
+## Rotation
 
-| Day | Round | Pool |
-| --- | ----- | ---- |
-| Mon | Build and extend | A |
-| Tue | Build and extend | B |
-| Wed | Build and extend | C |
-| Thu | Debug / review (zip from Claude) | D |
-| Fri | Build and extend | E or F, alternating weeks |
-| Sat | Unfamiliar codebase, or design-lite / AI-assisted | G or H, alternating weeks |
-| Sun | Off, or redo the week's weakest problem | |
+Each session takes the next slot, whatever the day. Skipped a day? Nothing to catch up on:
+the next session continues where the rotation left off. The last log row says where that is.
+
+| Slot | Round | Pool |
+| ---- | ----- | ---- |
+| 1 | Build and extend | A |
+| 2 | Build and extend | B |
+| 3 | Build and extend | C |
+| 4 | Debug / review (zip from Claude) | D |
+| 5 | Build and extend | E or F, alternating cycles |
+| 6 | Unfamiliar codebase, or design-lite / AI-assisted | G or H, alternating cycles |
+| 7 | Optional: redo the cycle's weakest problem from scratch | |
+
+Short on time (exams, college)? Take a 60-minute session: build only, notes later. A short
+session still counts and still moves the rotation.
 
 ## A. Async and concurrency
 
