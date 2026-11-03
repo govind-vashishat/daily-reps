@@ -1,0 +1,29 @@
+export async function promisePool<T>(
+    tasks: ReadonlyArray<() => Promise<T>>,
+    limit: number,
+): Promise<T[]> {
+    const results: T[] = [];
+    const pool = new Set();
+    if (!Number.isInteger(limit) || limit < 1) {
+        throw new RangeError("Limit must be a positive integer.");
+    }
+
+    for (let i = 0; i < tasks.length; i++) {
+        if(pool.size >= limit) {
+            await Promise.race(pool);
+        }
+
+        const taskPromise = tasks[i]();
+
+        const executePromise = taskPromise.then((response) => {
+            results[i] = response;
+        }).finally(() => {
+            pool.delete(executePromise);
+        })
+
+        pool.add(executePromise);
+    }
+
+    await Promise.all(pool);
+    return results;
+}
