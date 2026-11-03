@@ -8,12 +8,12 @@ export async function promisePool<T>(
         throw new RangeError("Limit must be a positive integer.");
     }
 
-    for (let i = 0; i < tasks.length; i++) {
+    for (const [i, task] of tasks.entries()) {
         if(pool.size >= limit) {
             await Promise.race(pool);
         }
 
-        const taskPromise = tasks[i]();
+        const taskPromise = task();
 
         const executePromise = taskPromise.then((response) => {
             results[i] = response;
