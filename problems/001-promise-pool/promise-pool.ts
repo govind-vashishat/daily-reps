@@ -3,7 +3,7 @@ export async function promisePool<T>(
     limit: number,
 ): Promise<T[]> {
     const results: T[] = [];
-    const pool = new Set();
+    const pool = new Set<unknown>();
     if (!Number.isInteger(limit) || limit < 1) {
         throw new RangeError("Limit must be a positive integer.");
     }
@@ -25,5 +25,28 @@ export async function promisePool<T>(
     }
 
     await Promise.all(pool);
+    console.log(results);
     return results;
 }
+
+const tasks = [
+    () => new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("Task 1 resolved")
+        }, 300);
+    }),
+    () => new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("Task 2 resolved")
+        }, 200);
+    }),
+    () => new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("Task 3 resolved");
+        }, 300);
+    }),
+]
+
+const limit = 2;
+
+await promisePool(tasks, limit);
