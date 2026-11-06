@@ -18,5 +18,7 @@ See [BANK.md](BANK.md) for what's next and [WEAKPOINTS.md](WEAKPOINTS.md) for wh
 
 ## Log
 
-| #   | Date | Problem | Pool | Done? | Time | Tags | Main miss | Review |
-| --- | ---- | ------- | ---- | ----- | ---- | ---- | --------- | ------ |
+| #   | Problem                                  | Pool | Round | Date       | Result                 | Tags                    |
+| --- | ---------------------------------------- | ---- | ----- | ---------- | ---------------------- | ----------------------- |
+| 001 | Promise pool                             | A    | Build | 2026-11-04 | Pass (core), sync RangeError open | ASYNC, ERR, TYPES |
+| 002 | runCommand with timeout + group kill     | B    | Build | 2026-11-07 | Pass, ESRCH bug open   | SYS, ERR, ASYNC, TYPES  |
