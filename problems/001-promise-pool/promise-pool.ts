@@ -9,17 +9,19 @@ export async function promisePool<T>(
     }
 
     for (const [i, task] of tasks.entries()) {
-        if(pool.size >= limit) {
+        if (pool.size >= limit) {
             await Promise.race(pool);
         }
 
         const taskPromise = task();
 
-        const executePromise = taskPromise.then((response) => {
-            results[i] = response;
-        }).finally(() => {
-            pool.delete(executePromise);
-        })
+        const executePromise = taskPromise
+            .then((response) => {
+                results[i] = response;
+            })
+            .finally(() => {
+                pool.delete(executePromise);
+            });
 
         pool.add(executePromise);
     }
@@ -30,22 +32,25 @@ export async function promisePool<T>(
 }
 
 const tasks = [
-    () => new Promise((resolve) => {
-        setTimeout(() => {
-            resolve("Task 1 resolved")
-        }, 300);
-    }),
-    () => new Promise((resolve) => {
-        setTimeout(() => {
-            resolve("Task 2 resolved")
-        }, 200);
-    }),
-    () => new Promise((resolve) => {
-        setTimeout(() => {
-            resolve("Task 3 resolved");
-        }, 300);
-    }),
-]
+    () =>
+        new Promise((resolve) => {
+            setTimeout(() => {
+                resolve("Task 1 resolved");
+            }, 300);
+        }),
+    () =>
+        new Promise((resolve) => {
+            setTimeout(() => {
+                resolve("Task 2 resolved");
+            }, 200);
+        }),
+    () =>
+        new Promise((resolve) => {
+            setTimeout(() => {
+                resolve("Task 3 resolved");
+            }, 300);
+        }),
+];
 
 const limit = 2;
 
